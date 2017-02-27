@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<body>
+  <p>
+    <label for="password">
+      Password:
+      <input type="password" id="password">
+    </label>
+  </p>
+  <button>Log in</button>
+  <script>
+    document.querySelector('button').addEventListener('click', function() {
+      fetch('/login', {
+        method: 'post',
+        credentials: 'include',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify({
+          password: document.getElementById('password').value
+        })
+      })
+      .then(response => response.text())
+      .then((result) => {
+        alert(result)
+        window.location.reload()
+      })
+    })
+  </script>
+</body>
+</html>
